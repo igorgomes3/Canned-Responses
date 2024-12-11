@@ -1,0 +1,11 @@
+{
+    "manifest_version": 3,
+    "name": "Canned Responses",
+    "version": "1.0",
+    "description": "Mesaj kaydetmenizi ve ihtiyaç anında kopyalamanızı sağlar",
+    "permissions": ["contextMenus", "storage"],
+    
+    "action": {
+      "default_popup": "popup.html"
+    }
+  }
