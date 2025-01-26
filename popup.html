@@ -1,104 +1,209 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Message Saver</title>
+  <title>Quick Messages</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
+    :root {
+      --primary-color: #4a90e2;
+      --hover-color: #357abd;
+      --bg-color: #f8f9fa;
+      --text-color: #2c3e50;
+      --border-color: #e1e4e8;
+    }
+    
     .hidden {
       display: none;
     }
+    
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Arial, sans-serif;
       margin: 20px;
-      width: 300px;
+      width: 320px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
     }
+    
     h1 {
       font-size: 24px;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       text-align: center;
+      color: var(--primary-color);
     }
+    
     ul {
       list-style-type: none;
       padding: 0;
-      max-height: 300px; /* Maksimum yükseklik */
-      overflow-y: auto; /* Dikey kaydırma çubuğu */
+      max-height: 300px;
+      overflow-y: auto;
     }
+    
     li {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      background-color: #f9f9f9;
+      margin-bottom: 12px;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
+    
+    li:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
     .message-content {
       flex-grow: 1;
-      margin-right: 10px;
+      margin-right: 12px;
       overflow: hidden;
     }
+    
     .message-title {
-      font-weight: bold;
+      font-weight: 600;
       display: block;
+      margin-bottom: 4px;
+      color: var(--text-color);
     }
+    
     .message-text {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      color: #555;
+      color: #666;
+      font-size: 0.9em;
     }
+    
     button {
-      margin-left: 5px;
+      margin-left: 8px;
       background: none;
       border: none;
       cursor: pointer;
       flex-shrink: 0;
+      padding: 4px;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
     }
+    
+    button:hover {
+      background-color: rgba(74, 144, 226, 0.1);
+    }
+    
     button i {
       font-size: 16px;
-      color: #333;
+      color: var(--text-color);
     }
+    
     #messageForm {
-      margin-top: 10px;
+      margin-top: 15px;
     }
+    
     #messageForm input, #messageForm textarea {
       display: block;
-      margin-bottom: 10px;
-      padding: 5px;
-      width: calc(100% - 12px);
-      border: 1px solid #ccc;
-      border-radius: 5px;
+      margin-bottom: 12px;
+      padding: 8px;
+      width: calc(100% - 18px);
+      border: 2px solid var(--border-color);
+      border-radius: 6px;
+      font-family: inherit;
+      transition: border-color 0.2s ease;
     }
+    
+    #messageForm input:focus, #messageForm textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+    
     #messageForm textarea {
-      height: 60px;
+      height: 80px;
       resize: none;
     }
+    
     #addMessageButton, #saveMessage {
       display: block;
       width: 100%;
-      padding: 10px;
-      background-color: #007bff;
+      padding: 12px;
+      background-color: var(--primary-color);
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       cursor: pointer;
       font-size: 16px;
+      font-weight: 500;
+      transition: background-color 0.2s ease;
     }
+    
     #addMessageButton:hover, #saveMessage:hover {
-      background-color: #0056b3;
+      background-color: var(--hover-color);
+    }
+    
+    .button-container {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+    
+    .secondary-button {
+      background-color: white;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      flex: 1;
+      white-space: nowrap;
+    }
+    
+    .secondary-button:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    #addMessageButton {
+      flex: 1;
+      padding: 8px 12px;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+    
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #999;
     }
   </style>
 </head>
 <body>
-  <h1>Mesajlar</h1>
+  <h1>Quick Messages</h1>
   <ul id="messageList"></ul>
-  <button id="addMessageButton">Yeni Mesaj Ekle</button>
+  <div class="button-container">
+    <button id="addMessageButton">Add New Message</button>
+    <button id="exportButton" class="secondary-button">Export Messages</button>
+  </div>
   <div id="messageForm" class="hidden">
-    <input type="text" id="newTitle" placeholder="Başlık">
-    <textarea id="newMessage" placeholder="Yeni mesaj"></textarea>
-    <button id="saveMessage">Kaydet</button>
+    <input type="text" id="newTitle" placeholder="Title">
+    <textarea id="newMessage" placeholder="Enter your message"></textarea>
+    <button id="saveMessage">Save</button>
   </div>
   <script src="popup.js"></script>
 </body>

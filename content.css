@@ -1,0 +1,60 @@
+.quick-messages-menu {
+    position: absolute;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-width: 300px;
+    z-index: 999999;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.quick-messages-menu .menu-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s ease;
+}
+
+.quick-messages-menu .menu-item:last-child {
+    border-bottom: none;
+}
+
+.quick-messages-menu .menu-item:hover {
+    background-color: #f5f5f5;
+}
+
+.quick-messages-menu .menu-item-icon {
+    color: #666;
+    font-size: 14px;
+    padding-top: 2px;
+}
+
+.quick-messages-menu .menu-item-content {
+    flex: 1;
+}
+
+.quick-messages-menu .menu-item-title {
+    font-weight: 500;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.quick-messages-menu .menu-item-preview {
+    font-size: 12px;
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.quick-messages-menu .no-results {
+    padding: 12px;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+}

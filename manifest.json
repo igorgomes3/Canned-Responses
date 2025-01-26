@@ -1,11 +1,25 @@
 {
     "manifest_version": 3,
-    "name": "Canned Responses",
+    "name": "Quick Messages",
     "version": "1.0",
-    "description": "Mesaj kaydetmenizi ve ihtiyaç anında kopyalamanızı sağlar",
-    "permissions": ["contextMenus", "storage"],
-    
+    "description": "Save and quickly copy your frequently used messages",
+    "permissions": [
+        "storage",
+        "activeTab",
+        "scripting"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["content.js"],
+            "css": ["content.css"],
+            "run_at": "document_end"
+        }
+    ],
     "action": {
-      "default_popup": "popup.html"
+        "default_popup": "popup.html"
     }
-  }
+}
